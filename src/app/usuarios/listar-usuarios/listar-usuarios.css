@@ -1,0 +1,265 @@
+:host {
+  display: block;
+  --umng-blue: #003b71;
+  --umng-navy: #001f3f;
+  --umng-ocre: #c49a2c;
+  --umng-gold: #e6c45c;
+  --umng-gray: #667085;
+  --umng-light: #f4f6f8;
+  --umng-white: #ffffff;
+}
+
+.usuarios-page {
+  min-height: 100dvh;
+  padding: 36px clamp(16px, 4vw, 56px);
+  background: var(--umng-light);
+  color: var(--umng-navy);
+}
+
+.page-header,
+.toolbar,
+.users-grid,
+.pagination,
+.status-panel {
+  max-width: 1160px;
+  margin-inline: auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--umng-blue);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1.02;
+}
+
+.summary {
+  max-width: 660px;
+  margin: 14px 0 0;
+  color: var(--umng-gray);
+}
+
+.header-badge {
+  min-width: 132px;
+  padding: 18px 20px;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  background: var(--umng-white);
+  text-align: right;
+}
+
+.header-badge span {
+  display: block;
+  color: var(--umng-blue);
+  font-size: 2.35rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.toolbar article {
+  padding: 16px 18px;
+  border: 1px solid #dedede;
+  border-top: 4px solid var(--umng-ocre);
+  border-radius: 8px;
+  background: var(--umng-white);
+}
+
+.toolbar span {
+  display: block;
+  color: var(--umng-blue);
+  font-size: 1.24rem;
+  font-weight: 900;
+}
+
+.toolbar p {
+  margin: 6px 0 0;
+  color: var(--umng-gray);
+  font-size: 0.88rem;
+}
+
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 24px;
+  padding: 16px 18px;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  background: var(--umng-white);
+}
+
+.pagination-summary {
+  margin: 0;
+  color: var(--umng-gray);
+}
+
+.pagination-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pagination-button {
+  min-width: 42px;
+  min-height: 40px;
+  padding: 0 13px;
+  border: 1px solid #cfd6df;
+  border-radius: 8px;
+  background: var(--umng-white);
+  color: var(--umng-blue);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.pagination-button:hover:not(:disabled),
+.pagination-button.active {
+  border-color: var(--umng-blue);
+  background: var(--umng-blue);
+  color: var(--umng-white);
+}
+
+.pagination-button:disabled {
+  color: #98a2b3;
+  cursor: not-allowed;
+}
+
+.user-card {
+  overflow: hidden;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  background: var(--umng-white);
+}
+
+.card-cover {
+  display: grid;
+  height: 116px;
+  place-items: end center;
+  background: var(--umng-blue);
+}
+
+.card-cover img {
+  width: 82px;
+  height: 82px;
+  margin-bottom: -32px;
+  border: 4px solid var(--umng-white);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card-body {
+  display: grid;
+  min-height: 124px;
+  justify-items: center;
+  padding: 44px 18px 20px;
+  text-align: center;
+}
+
+.card-body h2 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.25;
+}
+
+.role {
+  display: inline-flex;
+  align-self: end;
+  margin-top: 16px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(196, 154, 44, 0.18);
+  color: var(--umng-blue);
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.status-panel {
+  display: grid;
+  min-height: 240px;
+  margin-top: 22px;
+  place-items: center;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  background: var(--umng-white);
+  color: var(--umng-navy);
+  font-weight: 800;
+}
+
+.status-panel.error {
+  color: #991b1b;
+}
+
+.loader {
+  width: 42px;
+  height: 42px;
+  border: 4px solid #dedede;
+  border-top-color: var(--umng-ocre);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .usuarios-page {
+    padding: 26px 14px;
+  }
+
+  .page-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .header-badge {
+    text-align: left;
+  }
+
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .pagination-controls {
+    justify-content: center;
+  }
+
+  .pagination-button {
+    flex: 1 1 auto;
+  }
+}

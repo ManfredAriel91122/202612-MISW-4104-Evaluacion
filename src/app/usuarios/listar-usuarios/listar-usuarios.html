@@ -1,0 +1,100 @@
+<main class="usuarios-page">
+  <section class="page-header">
+    <div>
+      <p class="eyebrow">Directorio GitHub</p>
+      <h1>Usuarios del equipo</h1>
+      <p class="summary">
+        Perfiles sincronizados desde GitHub Gist con roles, ubicación y repositorios asociados.
+      </p>
+    </div>
+    <div class="header-badge" aria-label="Total de perfiles">
+      <span>30</span>
+      <small>perfiles</small>
+    </div>
+  </section>
+
+  @if (usuariosVm$ | async; as vm) {
+    @if (vm.cargando) {
+      <section class="status-panel" aria-live="polite">
+        <div class="loader"></div>
+        <p>Cargando usuarios...</p>
+      </section>
+    } @else if (vm.error) {
+      <section class="status-panel error" aria-live="assertive">
+        <p>No fue posible cargar los usuarios. Intenta de nuevo más tarde.</p>
+      </section>
+    } @else {
+      <section class="toolbar" aria-label="Resumen del listado">
+        <article>
+          <span>{{ vm.usuarios.length }}</span>
+          <p>Usuarios encontrados</p>
+        </article>
+        <article>
+          <span>GitHub</span>
+          <p>Fuente remota</p>
+        </article>
+        <article>
+          <span>3</span>
+          <p>Roles del equipo</p>
+        </article>
+      </section>
+
+      <section class="users-grid" aria-label="Listado de usuarios">
+        @for (usuario of obtenerUsuariosPaginados(vm.usuarios); track identificarUsuario($index, usuario)) {
+          <article class="user-card">
+            <header class="card-cover">
+              <img [src]="usuario.avatarUrl" [alt]="'Avatar de ' + usuario.name" />
+            </header>
+
+            <div class="card-body">
+              <h2>{{ usuario.name }}</h2>
+              <span class="role">{{ usuario.role }}</span>
+            </div>
+          </article>
+        }
+      </section>
+
+      @if (obtenerTotalPaginas(vm.usuarios) > 1) {
+        <nav class="pagination" aria-label="Paginación de usuarios">
+          <p class="pagination-summary">
+            Mostrando {{ obtenerRangoActual(vm.usuarios) }} usuarios
+          </p>
+
+          <div class="pagination-controls">
+            <button
+              type="button"
+              class="pagination-button"
+              [disabled]="paginaActual === 1"
+              (click)="irPaginaAnterior(vm.usuarios)"
+              aria-label="Ir a la página anterior"
+            >
+              Anterior
+            </button>
+
+            @for (pagina of obtenerPaginas(vm.usuarios); track pagina) {
+              <button
+                type="button"
+                class="pagination-button page-number"
+                [class.active]="paginaActual === pagina"
+                [attr.aria-current]="paginaActual === pagina ? 'page' : null"
+                (click)="cambiarPagina(pagina, vm.usuarios)"
+              >
+                {{ pagina }}
+              </button>
+            }
+
+            <button
+              type="button"
+              class="pagination-button"
+              [disabled]="paginaActual === obtenerTotalPaginas(vm.usuarios)"
+              (click)="irPaginaSiguiente(vm.usuarios)"
+              aria-label="Ir a la página siguiente"
+            >
+              Siguiente
+            </button>
+          </div>
+        </nav>
+      }
+    }
+  }
+</main>
