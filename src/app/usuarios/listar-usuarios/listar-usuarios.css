@@ -201,6 +201,21 @@
   font-weight: 900;
 }
 
+.role-admin {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.role-developer {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.role-tester {
+  background: #dcfce7;
+  color: #166534;
+}
+
 .status-panel {
   display: grid;
   min-height: 240px;

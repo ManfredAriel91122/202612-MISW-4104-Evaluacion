@@ -70,6 +70,10 @@ export class ListarUsuarios {
     return `${inicio}-${fin} de ${usuarios.length}`;
   }
 
+  obtenerClaseRol(rol: string): string {
+    return `role-${rol.toLowerCase().replaceAll(' ', '-')}`;
+  }
+
   obtenerIniciales(usuario: Usuario): string {
     return usuario.name
       .split(' ')

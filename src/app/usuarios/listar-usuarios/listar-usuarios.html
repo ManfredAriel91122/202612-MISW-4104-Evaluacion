@@ -48,7 +48,9 @@
 
             <div class="card-body">
               <h2>{{ usuario.name }}</h2>
-              <span class="role">{{ usuario.role }}</span>
+              <span class="role" [ngClass]="obtenerClaseRol(usuario.role)">
+                {{ usuario.role | titlecase }}
+              </span>
             </div>
           </article>
         }
