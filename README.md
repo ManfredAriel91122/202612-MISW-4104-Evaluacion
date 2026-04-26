@@ -1,59 +1,103 @@
-# EvaluacionPracticaAngular
+# Evaluacion Practica Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.8.
+![Angular](https://img.shields.io/badge/Angular-21.2.10-DD0031?logo=angular&logoColor=white)
+![Angular CLI](https://img.shields.io/badge/Angular%20CLI-21.2.8-C3002F?logo=angular&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-24.14.1-339933?logo=node.js&logoColor=white)
+![npm](https://img.shields.io/badge/npm-11.11.0-CB3837?logo=npm&logoColor=white)
+![Conventional Commits](https://img.shields.io/badge/commits-Conventional%20Commits-FE5196?logo=conventionalcommits&logoColor=white)
 
-## Development server
+Aplicacion desarrollada con Angular para listar usuarios obtenidos desde una fuente remota. La interfaz muestra tarjetas de perfil, paginacion, etiquetas visuales por rol y efectos sutiles de interaccion.
 
-To start a local development server, run:
+## Tecnologias
 
-```bash
-ng serve
-```
+- Angular 21.2.10
+- Angular CLI 21.2.8
+- Node.js 24.14.1
+- npm 11.11.0
+- TypeScript 5.9.3
+- RxJS 7.8.2
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Requisitos
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Antes de ejecutar el proyecto, verifica que tengas instalada la version compatible de Node.js:
 
 ```bash
-ng build
+node --version
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+La version usada en este proyecto es:
 
 ```bash
-ng test
+v24.14.1
 ```
 
-## Running end-to-end tests
+## Instalacion
 
-For end-to-end (e2e) testing, run:
+Instala las dependencias del proyecto:
 
 ```bash
-ng e2e
+npm install
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Servidor de desarrollo
 
-## Additional Resources
+Ejecuta la aplicacion en modo desarrollo:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm start
+```
+
+Luego abre el navegador en:
+
+```text
+http://localhost:4200/
+```
+
+La aplicacion se recarga automaticamente cuando modificas archivos del proyecto.
+
+## Compilacion
+
+Para generar una version de produccion:
+
+```bash
+npm run build
+```
+
+Los archivos compilados se generan en la carpeta `dist/`.
+
+## Pruebas
+
+Para ejecutar las pruebas unitarias:
+
+```bash
+npm test
+```
+
+## Convencion de commits
+
+Este proyecto usa **Conventional Commits** para mantener un historial claro y facil de leer.
+
+Formato recomendado:
+
+```text
+type: descripcion breve del cambio
+```
+
+Tipos comunes:
+
+- `feat`: agrega una nueva funcionalidad.
+- `fix`: corrige un error.
+- `style`: cambios visuales o de formato que no modifican la logica.
+- `refactor`: mejora interna del codigo sin cambiar el comportamiento.
+- `test`: agrega o ajusta pruebas.
+- `docs`: cambios en documentacion.
+- `chore`: tareas de mantenimiento.
+
+Ejemplos:
+
+```text
+feat: agregar listado paginado de usuarios
+style: mejorar visualmente las etiquetas de rol
+fix: corregir navegacion entre paginas
+docs: actualizar instrucciones del proyecto
+```
