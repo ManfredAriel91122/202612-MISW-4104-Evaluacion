@@ -1,2 +1,13 @@
-<app-listar-usuarios />
-<app-listar-repositorios />
+<header class="app-shell-header">
+  <a class="brand" routerLink="/usuarios" aria-label="Ir al inicio">
+    <span>GitHub Lab</span>
+    <small>Directorio tecnico</small>
+  </a>
+
+  <nav class="app-nav" aria-label="Navegacion principal">
+    <a routerLink="/usuarios" routerLinkActive="active">Usuarios</a>
+    <a routerLink="/repositorios" routerLinkActive="active">Repositorios</a>
+  </nav>
+</header>
+
+<router-outlet></router-outlet>

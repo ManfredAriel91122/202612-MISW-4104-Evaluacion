@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
+import { provideRouter, Router } from '@angular/router';
 import { App } from './app';
+import { routes } from './app.routes';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideHttpClient()],
+      providers: [provideHttpClient(), provideRouter(routes)],
     }).compileComponents();
   });
 
@@ -18,6 +20,9 @@ describe('App', () => {
 
   it('should render users feature', async () => {
     const fixture = TestBed.createComponent(App);
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl('/usuarios');
+    fixture.detectChanges();
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('app-listar-usuarios')).toBeTruthy();
@@ -25,6 +30,9 @@ describe('App', () => {
 
   it('should render repositories feature', async () => {
     const fixture = TestBed.createComponent(App);
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl('/repositorios');
+    fixture.detectChanges();
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('app-listar-repositorios')).toBeTruthy();

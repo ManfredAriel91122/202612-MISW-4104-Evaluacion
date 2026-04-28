@@ -1,4 +1,85 @@
 :host {
   display: block;
   min-height: 100dvh;
+  background: #f4f6f8;
+}
+
+.app-shell-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px clamp(16px, 4vw, 56px);
+  border-bottom: 1px solid #dedede;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  display: grid;
+  color: #001f3f;
+  text-decoration: none;
+}
+
+.brand span {
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.brand small {
+  margin-top: 2px;
+  color: #667085;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-nav a {
+  position: relative;
+  padding: 10px 8px;
+  color: #003b71;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+}
+
+.app-nav a::after {
+  position: absolute;
+  right: 8px;
+  bottom: 4px;
+  left: 8px;
+  height: 3px;
+  border-radius: 999px;
+  background: transparent;
+  content: '';
+}
+
+.app-nav a:hover,
+.app-nav a.active {
+  color: #001f3f;
+}
+
+.app-nav a:hover::after,
+.app-nav a.active::after {
+  background: #c49a2c;
+}
+
+@media (max-width: 640px) {
+  .app-shell-header {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .app-nav {
+    justify-content: space-between;
+  }
 }
