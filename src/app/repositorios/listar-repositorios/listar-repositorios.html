@@ -36,7 +36,12 @@
       </section>
 
       <section class="master-detail">
-        <div>
+        <div class="list-panel">
+          <header class="panel-header">
+            <span>Listado</span>
+            <small>Selecciona una tarjeta</small>
+          </header>
+
           <section class="repositories-grid" aria-label="Listado de repositorios">
             @for (
               repositorio of obtenerRepositoriosPaginados(vm.repositorios);
@@ -108,6 +113,11 @@
         </div>
 
         <aside class="detail-column" aria-label="Detalle de repositorio">
+          <header class="panel-header">
+            <span>Detalle</span>
+            <small>Vista por URL</small>
+          </header>
+
           @if (mostrarDetalle()) {
             <router-outlet></router-outlet>
           } @else {

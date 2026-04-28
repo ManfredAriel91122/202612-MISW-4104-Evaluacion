@@ -40,7 +40,12 @@
       </section>
 
       <section class="master-detail">
-        <div>
+        <div class="list-panel">
+          <header class="panel-header">
+            <span>Listado</span>
+            <small>Selecciona una tarjeta</small>
+          </header>
+
           <section class="users-grid" aria-label="Listado de usuarios">
             @for (usuario of obtenerUsuariosPaginados(vm.usuarios); track identificarUsuario($index, usuario)) {
               <button
@@ -108,10 +113,17 @@
           }
         </div>
 
-        <app-detalle-usuario
-          [usuario]="usuarioSeleccionado"
-          (cerrar)="cerrarDetalle()"
-        ></app-detalle-usuario>
+        <aside class="detail-column" aria-label="Detalle de usuario">
+          <header class="panel-header">
+            <span>Detalle</span>
+            <small>Perfil seleccionado</small>
+          </header>
+
+          <app-detalle-usuario
+            [usuario]="usuarioSeleccionado"
+            (cerrar)="cerrarDetalle()"
+          ></app-detalle-usuario>
+        </aside>
       </section>
     }
   }

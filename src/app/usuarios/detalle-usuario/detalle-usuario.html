@@ -1,9 +1,5 @@
 @if (usuario) {
   <aside class="detail-panel" aria-label="Detalle del usuario">
-    <button type="button" class="close-button" (click)="cerrar.emit()" aria-label="Cerrar detalle">
-      Cerrar
-    </button>
-
     <header class="detail-header">
       <img [src]="usuario.avatarUrl" [alt]="'Avatar de ' + usuario.name" />
       <div>

@@ -30,19 +30,6 @@
   background: var(--umng-white);
 }
 
-.close-button {
-  float: right;
-  margin: 12px 12px 0 0;
-  padding: 2px 8px;
-  border: 1px solid #cfd6df;
-  border-radius: 8px;
-  background: var(--umng-white);
-  color: var(--umng-blue);
-  font-size: 0.78rem;
-  font-weight: 900;
-  text-decoration: none;
-}
-
 .detail-header {
   display: grid;
   gap: 10px;
