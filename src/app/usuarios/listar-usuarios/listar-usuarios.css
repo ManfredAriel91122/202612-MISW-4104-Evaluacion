@@ -50,12 +50,14 @@
 }
 
 .header-badge {
+  display: grid;
+  justify-items: center;
   min-width: 132px;
   padding: 16px 18px;
   border: 1px solid #dedede;
   border-radius: 8px;
   background: var(--umng-white);
-  text-align: right;
+  text-align: center;
 }
 
 .header-badge span {
@@ -79,6 +81,7 @@
   border-top: 4px solid var(--umng-ocre);
   border-radius: 8px;
   background: var(--umng-white);
+  text-align: center;
 }
 
 .toolbar span {
@@ -279,10 +282,6 @@
   .page-header {
     align-items: stretch;
     flex-direction: column;
-  }
-
-  .header-badge {
-    text-align: left;
   }
 
   .toolbar {
