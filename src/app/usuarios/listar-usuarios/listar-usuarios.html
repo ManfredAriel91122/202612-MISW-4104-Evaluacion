@@ -119,10 +119,17 @@
             <small>Perfil seleccionado</small>
           </header>
 
-          <app-detalle-usuario
-            [usuario]="usuarioSeleccionado"
-            (cerrar)="cerrarDetalle()"
-          ></app-detalle-usuario>
+          @for (usuarioDetalle of obtenerDetalleSeleccionado(); track usuarioDetalle.id) {
+            <app-detalle-usuario
+              [usuario]="usuarioDetalle"
+              (cerrar)="cerrarDetalle()"
+            ></app-detalle-usuario>
+          } @empty {
+            <app-detalle-usuario
+              [usuario]="null"
+              (cerrar)="cerrarDetalle()"
+            ></app-detalle-usuario>
+          }
         </aside>
       </section>
     }

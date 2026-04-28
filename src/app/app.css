@@ -1,7 +1,17 @@
 :host {
   display: block;
   min-height: 100dvh;
-  background: #f4f6f8;
+  background-color: #f4f6f8;
+  background-image:
+    linear-gradient(145deg, rgba(0, 59, 113, 0.18), rgba(0, 59, 113, 0.06) 34%, transparent 62%),
+    linear-gradient(28deg, rgba(196, 154, 44, 0.24), rgba(196, 154, 44, 0.08) 42%, transparent 72%),
+    linear-gradient(180deg, #f9fafb, #eef3f7);
+  background-attachment: fixed;
+  background-position:
+    0 0,
+    0 0,
+    0 0;
+  animation: appBackgroundFlow 16s ease-in-out infinite alternate;
 }
 
 .app-shell-header {
@@ -72,6 +82,15 @@
   background: #c49a2c;
 }
 
+@keyframes appBackgroundFlow {
+  to {
+    background-position:
+      8% 0,
+      -8% 6%,
+      0 0;
+  }
+}
+
 @media (max-width: 640px) {
   .app-shell-header {
     align-items: stretch;
@@ -81,5 +100,11 @@
 
   .app-nav {
     justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host {
+    animation: none;
   }
 }

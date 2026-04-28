@@ -51,6 +51,7 @@
                 class="repository-card"
                 [routerLink]="['/repositorios', repositorio.id]"
                 routerLinkActive="selected"
+                [style.animation-delay.ms]="$index * 45"
               >
                 <header class="repo-cover">
                   <span aria-hidden="true"></span>

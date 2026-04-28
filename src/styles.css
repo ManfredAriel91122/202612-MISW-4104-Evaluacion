@@ -19,3 +19,99 @@ textarea,
 select {
   font: inherit;
 }
+
+.app-shell-header,
+.page-header,
+.repositorios-header,
+.toolbar article,
+.repo-metrics article,
+.list-panel,
+.detail-column,
+.detail-panel,
+.detail-placeholder,
+.status-panel {
+  animation: surfaceIn 520ms ease both;
+}
+
+.user-card,
+.repository-card {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.repository-card {
+  animation: cardIn 420ms ease both;
+}
+
+.repository-card:nth-child(2n),
+.user-card:nth-child(2n) {
+  animation-delay: 45ms;
+}
+
+.repository-card:nth-child(3n),
+.user-card:nth-child(3n) {
+  animation-delay: 90ms;
+}
+
+.repository-card:nth-child(4n),
+.user-card:nth-child(4n) {
+  animation-delay: 135ms;
+}
+
+.user-card:hover,
+.user-card.selected,
+.repository-card:hover,
+.repository-card.selected {
+  box-shadow: 0 12px 24px rgba(0, 31, 63, 0.12);
+  transform: translateY(-3px);
+}
+
+.card-cover img,
+.repo-cover span {
+  transition: transform 180ms ease;
+}
+
+.repository-card:hover .repo-cover span,
+.repository-card.selected .repo-cover span {
+  transform: scale(1.05);
+}
+
+.pagination-button,
+.app-nav a {
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.pagination-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+@keyframes surfaceIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}

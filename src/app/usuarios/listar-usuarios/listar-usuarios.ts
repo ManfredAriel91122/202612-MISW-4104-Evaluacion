@@ -24,10 +24,7 @@ export class ListarUsuarios {
 
   constructor(private readonly usuarioService: UsuarioService) {
     this.usuariosVm$ = this.usuarioService.obtenerUsuarios().pipe(
-      map((usuarios) => {
-        this.usuarioSeleccionado ??= usuarios[0] ?? null;
-        return { usuarios, cargando: false, error: false };
-      }),
+      map((usuarios) => ({ usuarios, cargando: false, error: false })),
       startWith({ usuarios: [], cargando: true, error: false }),
       catchError(() => of({ usuarios: [], cargando: false, error: true })),
     );
@@ -70,6 +67,10 @@ export class ListarUsuarios {
 
   cerrarDetalle(): void {
     this.usuarioSeleccionado = null;
+  }
+
+  obtenerDetalleSeleccionado(): Usuario[] {
+    return this.usuarioSeleccionado ? [this.usuarioSeleccionado] : [];
   }
 
   esUsuarioSeleccionado(usuario: Usuario): boolean {
