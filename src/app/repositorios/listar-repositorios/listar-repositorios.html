@@ -1,0 +1,72 @@
+<section class="repositorios-page">
+  <header class="repositorios-header">
+    <div>
+      <p class="eyebrow">Repositorio remoto</p>
+      <h2>Repositorios del equipo</h2>
+      <p class="summary">
+        Inventario técnico sincronizado desde GitHub Gist con lenguaje, propietario y popularidad.
+      </p>
+    </div>
+  </header>
+
+  @if (repositoriosVm$ | async; as vm) {
+    @if (vm.cargando) {
+      <section class="status-panel" aria-live="polite">
+        <div class="loader"></div>
+        <p>Cargando repositorios...</p>
+      </section>
+    } @else if (vm.error) {
+      <section class="status-panel error" aria-live="assertive">
+        <p>No fue posible cargar los repositorios. Intenta de nuevo más tarde.</p>
+      </section>
+    } @else {
+      <section class="repo-metrics" aria-label="Resumen de repositorios">
+        <article>
+          <span>{{ vm.repositorios.length }}</span>
+          <p>Repositorios</p>
+        </article>
+        <article>
+          <span>{{ obtenerTotalEstrellas(vm.repositorios) }}</span>
+          <p>Estrellas acumuladas</p>
+        </article>
+        <article>
+          <span>{{ obtenerLenguajes(vm.repositorios).length }}</span>
+          <p>Lenguajes detectados</p>
+        </article>
+      </section>
+
+      <section class="language-strip" aria-label="Lenguajes disponibles">
+        @for (lenguaje of obtenerLenguajes(vm.repositorios); track lenguaje) {
+          <span [ngClass]="obtenerClaseLenguaje(lenguaje)">{{ lenguaje }}</span>
+        }
+      </section>
+
+      <section class="repositories-grid" aria-label="Listado de repositorios">
+        @for (
+          repositorio of vm.repositorios;
+          track identificarRepositorio($index, repositorio)
+        ) {
+          <article class="repository-card">
+            <div class="repository-card-header">
+              <span class="repository-id">#{{ repositorio.id }}</span>
+              <span class="language-pill" [ngClass]="obtenerClaseLenguaje(repositorio.language)">
+                {{ repositorio.language }}
+              </span>
+            </div>
+
+            <h3>{{ repositorio.name }}</h3>
+            <p class="description">{{ repositorio.description }}</p>
+
+            <footer>
+              <span>{{ repositorio.stars }} estrellas</span>
+              <span>Owner {{ repositorio.ownerId }}</span>
+              <time [attr.datetime]="repositorio.createdAt">
+                {{ repositorio.createdAt }}
+              </time>
+            </footer>
+          </article>
+        }
+      </section>
+    }
+  }
+</section>

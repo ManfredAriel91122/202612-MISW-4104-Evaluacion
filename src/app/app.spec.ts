@@ -22,4 +22,11 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('app-listar-usuarios')).toBeTruthy();
   });
+
+  it('should render repositories feature', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('app-listar-repositorios')).toBeTruthy();
+  });
 });
