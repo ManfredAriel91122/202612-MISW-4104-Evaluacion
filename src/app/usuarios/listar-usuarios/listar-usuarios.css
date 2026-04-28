@@ -11,17 +11,16 @@
 
 .usuarios-page {
   min-height: 100dvh;
-  padding: 36px clamp(16px, 4vw, 56px);
+  padding: 24px clamp(16px, 4vw, 56px);
   background: var(--umng-light);
   color: var(--umng-navy);
 }
 
 .page-header,
 .toolbar,
-.users-grid,
-.pagination,
+.master-detail,
 .status-panel {
-  max-width: 1160px;
+  max-width: 1500px;
   margin-inline: auto;
 }
 
@@ -30,31 +29,29 @@
   align-items: end;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
 
 .eyebrow {
   margin: 0 0 10px;
   color: var(--umng-blue);
-  font-size: 0.78rem;
   font-weight: 900;
 }
 
 .page-header h1 {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-size: clamp(2rem, 4vw, 3.1rem);
   line-height: 1.02;
 }
 
 .summary {
-  max-width: 660px;
-  margin: 14px 0 0;
+  margin: 10px 0 0;
   color: var(--umng-gray);
 }
 
 .header-badge {
   min-width: 132px;
-  padding: 18px 20px;
+  padding: 16px 18px;
   border: 1px solid #dedede;
   border-radius: 8px;
   background: var(--umng-white);
@@ -73,11 +70,11 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
 
 .toolbar article {
-  padding: 16px 18px;
+  padding: 12px 16px;
   border: 1px solid #dedede;
   border-top: 4px solid var(--umng-ocre);
   border-radius: 8px;
@@ -99,8 +96,14 @@
 
 .users-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.master-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 22px;
 }
 
 .pagination {
@@ -108,16 +111,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  margin-top: 24px;
-  padding: 16px 18px;
+  margin-top: 16px;
+  padding: 12px 16px;
   border: 1px solid #dedede;
   border-radius: 8px;
   background: var(--umng-white);
-}
-
-.pagination-summary {
-  margin: 0;
-  color: var(--umng-gray);
 }
 
 .pagination-controls {
@@ -129,15 +127,13 @@
 .pagination-button {
   min-width: 42px;
   min-height: 40px;
-  padding: 0 13px;
+  padding: 0 12px;
   border: 1px solid #cfd6df;
   border-radius: 8px;
   background: var(--umng-white);
   color: var(--umng-blue);
   cursor: pointer;
   font: inherit;
-  font-size: 0.84rem;
-  font-weight: 900;
 }
 
 .pagination-button:hover:not(:disabled),
@@ -147,26 +143,27 @@
   color: var(--umng-white);
 }
 
-.pagination-button:disabled {
-  color: #98a2b3;
-}
-
 .user-card {
   overflow: hidden;
   border: 1px solid #dedede;
   border-radius: 8px;
   background: var(--umng-white);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
   animation: cardIn 420ms ease both;
+  text-align: initial;
 }
 
-.user-card:hover {
+.user-card:hover,
+.user-card.selected {
   border-color: rgba(196, 154, 44, 0.65);
 }
 
 .card-cover {
   position: relative;
   display: grid;
-  height: 116px;
+  height: 96px;
   place-items: end center;
   background: var(--umng-blue);
 }
@@ -174,48 +171,44 @@
 .card-cover::before {
   position: absolute;
   inset: 0 0 auto 0;
-  height: 7px;
+  height: 6px;
   background: var(--umng-ocre);
   content: '';
 }
 
 .card-cover img {
-  width: 82px;
-  height: 82px;
-  margin-bottom: -32px;
+  width: 72px;
+  height: 72px;
+  margin-bottom: -28px;
   border: 4px solid var(--umng-white);
   border-radius: 50%;
   object-fit: cover;
-  transition: transform 180ms ease;
 }
 
 .user-card:hover .card-cover img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 .card-body {
   display: grid;
-  min-height: 124px;
+  min-height: 104px;
   justify-items: center;
-  padding: 44px 18px 20px;
+  padding: 36px 14px 16px;
   text-align: center;
 }
 
 .card-body h2 {
   margin: 0;
   font-size: 1.08rem;
-  line-height: 1.25;
 }
 
 .role {
   display: inline-flex;
   align-self: end;
-  margin-top: 16px;
-  padding: 7px 10px;
-  border-radius: 999px;
+  margin-top: 12px;
+  padding: 6px 9px;
   background: rgba(196, 154, 44, 0.18);
   color: var(--umng-blue);
-  font-size: 0.76rem;
   font-weight: 900;
 }
 
@@ -269,6 +262,12 @@
   from {
     opacity: 0;
     transform: translateY(12px);
+  }
+}
+
+@media (max-width: 1200px) {
+  .users-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
 

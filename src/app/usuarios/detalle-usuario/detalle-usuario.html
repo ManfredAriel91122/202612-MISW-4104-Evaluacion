@@ -1,0 +1,48 @@
+@if (usuario) {
+  <aside class="detail-panel" aria-label="Detalle del usuario">
+    <button type="button" class="close-button" (click)="cerrar.emit()" aria-label="Cerrar detalle">
+      Cerrar
+    </button>
+
+    <header class="detail-header">
+      <img [src]="usuario.avatarUrl" [alt]="'Avatar de ' + usuario.name" />
+      <div>
+        <p class="eyebrow">Perfil seleccionado</p>
+        <h2>{{ usuario.name }}</h2>
+        <span class="role">{{ usuario.role | titlecase }}</span>
+      </div>
+    </header>
+
+    <dl class="detail-list">
+      <div>
+        <dt>Usuario</dt>
+        <dd>{{ usuario.username }}</dd>
+      </div>
+      <div>
+        <dt>Correo</dt>
+        <dd>{{ usuario.email }}</dd>
+      </div>
+      <div>
+        <dt>Ubicacion</dt>
+        <dd>{{ usuario.location }}</dd>
+      </div>
+      <div>
+        <dt>Repositorios</dt>
+        <dd>{{ contarRepositorios(usuario) }}</dd>
+      </div>
+    </dl>
+
+    <section class="repo-section" aria-label="Repositorios asociados">
+      <h3>Repositorios asociados</h3>
+      <div class="repo-list">
+        @for (repoId of usuario.repoIds; track repoId) {
+          <span>#{{ repoId }}</span>
+        }
+      </div>
+    </section>
+  </aside>
+} @else {
+  <aside class="detail-panel empty" aria-label="Detalle del usuario">
+    <p>Selecciona un usuario para ver su detalle.</p>
+  </aside>
+}

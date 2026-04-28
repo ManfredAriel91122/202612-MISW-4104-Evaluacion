@@ -20,10 +20,14 @@ export class ListarUsuarios {
   readonly usuariosVm$: Observable<UsuariosViewModel>;
   readonly usuariosPorPagina = 8;
   paginaActual = 1;
+  usuarioSeleccionado: Usuario | null = null;
 
   constructor(private readonly usuarioService: UsuarioService) {
     this.usuariosVm$ = this.usuarioService.obtenerUsuarios().pipe(
-      map((usuarios) => ({ usuarios, cargando: false, error: false })),
+      map((usuarios) => {
+        this.usuarioSeleccionado ??= usuarios[0] ?? null;
+        return { usuarios, cargando: false, error: false };
+      }),
       startWith({ usuarios: [], cargando: true, error: false }),
       catchError(() => of({ usuarios: [], cargando: false, error: true })),
     );
@@ -58,6 +62,18 @@ export class ListarUsuarios {
 
   irPaginaSiguiente(usuarios: Usuario[]): void {
     this.cambiarPagina(this.paginaActual + 1, usuarios);
+  }
+
+  seleccionarUsuario(usuario: Usuario): void {
+    this.usuarioSeleccionado = usuario;
+  }
+
+  cerrarDetalle(): void {
+    this.usuarioSeleccionado = null;
+  }
+
+  esUsuarioSeleccionado(usuario: Usuario): boolean {
+    return this.usuarioSeleccionado?.id === usuario.id;
   }
 
   obtenerRangoActual(usuarios: Usuario[]): string {

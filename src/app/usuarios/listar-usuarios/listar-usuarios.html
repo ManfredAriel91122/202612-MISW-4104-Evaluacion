@@ -39,64 +39,80 @@
         </article>
       </section>
 
-      <section class="users-grid" aria-label="Listado de usuarios">
-        @for (usuario of obtenerUsuariosPaginados(vm.usuarios); track identificarUsuario($index, usuario)) {
-          <article class="user-card" [style.animation-delay.ms]="$index * 45">
-            <header class="card-cover">
-              <img [src]="usuario.avatarUrl" [alt]="'Avatar de ' + usuario.name" />
-            </header>
-
-            <div class="card-body">
-              <h2>{{ usuario.name }}</h2>
-              <span class="role" [ngClass]="obtenerClaseRol(usuario.role)">
-                {{ usuario.role | titlecase }}
-              </span>
-            </div>
-          </article>
-        }
-      </section>
-
-      @if (obtenerTotalPaginas(vm.usuarios) > 1) {
-        <nav class="pagination" aria-label="Paginación de usuarios">
-          <p class="pagination-summary">
-            Mostrando {{ obtenerRangoActual(vm.usuarios) }} usuarios
-          </p>
-
-          <div class="pagination-controls">
-            <button
-              type="button"
-              class="pagination-button"
-              [disabled]="paginaActual === 1"
-              (click)="irPaginaAnterior(vm.usuarios)"
-              aria-label="Ir a la página anterior"
-            >
-              Anterior
-            </button>
-
-            @for (pagina of obtenerPaginas(vm.usuarios); track pagina) {
+      <section class="master-detail">
+        <div>
+          <section class="users-grid" aria-label="Listado de usuarios">
+            @for (usuario of obtenerUsuariosPaginados(vm.usuarios); track identificarUsuario($index, usuario)) {
               <button
                 type="button"
-                class="pagination-button page-number"
-                [class.active]="paginaActual === pagina"
-                [attr.aria-current]="paginaActual === pagina ? 'page' : null"
-                (click)="cambiarPagina(pagina, vm.usuarios)"
+                class="user-card"
+                [class.selected]="esUsuarioSeleccionado(usuario)"
+                [style.animation-delay.ms]="$index * 45"
+                (click)="seleccionarUsuario(usuario)"
+                [attr.aria-pressed]="esUsuarioSeleccionado(usuario)"
               >
-                {{ pagina }}
+                <header class="card-cover">
+                  <img [src]="usuario.avatarUrl" [alt]="'Avatar de ' + usuario.name" />
+                </header>
+
+                <div class="card-body">
+                  <h2>{{ usuario.name }}</h2>
+                  <span class="role" [ngClass]="obtenerClaseRol(usuario.role)">
+                    {{ usuario.role | titlecase }}
+                  </span>
+                </div>
               </button>
             }
+          </section>
 
-            <button
-              type="button"
-              class="pagination-button"
-              [disabled]="paginaActual === obtenerTotalPaginas(vm.usuarios)"
-              (click)="irPaginaSiguiente(vm.usuarios)"
-              aria-label="Ir a la página siguiente"
-            >
-              Siguiente
-            </button>
-          </div>
-        </nav>
-      }
+          @if (obtenerTotalPaginas(vm.usuarios) > 1) {
+            <nav class="pagination" aria-label="Paginación de usuarios">
+              <p class="pagination-summary">
+                Mostrando {{ obtenerRangoActual(vm.usuarios) }} usuarios
+              </p>
+
+              <div class="pagination-controls">
+                <button
+                  type="button"
+                  class="pagination-button"
+                  [disabled]="paginaActual === 1"
+                  (click)="irPaginaAnterior(vm.usuarios)"
+                  aria-label="Ir a la página anterior"
+                >
+                  Anterior
+                </button>
+
+                @for (pagina of obtenerPaginas(vm.usuarios); track pagina) {
+                  <button
+                    type="button"
+                    class="pagination-button page-number"
+                    [class.active]="paginaActual === pagina"
+                    [attr.aria-current]="paginaActual === pagina ? 'page' : null"
+                    (click)="cambiarPagina(pagina, vm.usuarios)"
+                  >
+                    {{ pagina }}
+                  </button>
+                }
+
+                <button
+                  type="button"
+                  class="pagination-button"
+                  [disabled]="paginaActual === obtenerTotalPaginas(vm.usuarios)"
+                  (click)="irPaginaSiguiente(vm.usuarios)"
+                  aria-label="Ir a la página siguiente"
+                >
+                  Siguiente
+                </button>
+              </div>
+            </nav>
+          }
+        </div>
+
+        <app-detalle-usuario
+          [usuario]="usuarioSeleccionado"
+          (cerrar)="cerrarDetalle()"
+        ></app-detalle-usuario>
+      </section>
     }
   }
 </main>
