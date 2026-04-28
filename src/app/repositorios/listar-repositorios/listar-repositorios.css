@@ -17,6 +17,7 @@
 
 .repositorios-header,
 .repo-metrics,
+.master-detail,
 .repositories-grid,
 .pagination,
 .status-panel {
@@ -96,6 +97,32 @@
   gap: 14px;
 }
 
+.master-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 22px;
+}
+
+.detail-placeholder,
+.status-panel {
+  display: grid;
+  min-height: 240px;
+  place-items: center;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  background: var(--umng-white);
+  font-weight: 800;
+}
+
+.detail-placeholder {
+  position: sticky;
+  top: 80px;
+  min-height: 260px;
+  padding: 22px;
+  border-top: 7px solid var(--umng-ocre);
+  color: var(--umng-gray);
+}
+
 .pagination {
   display: flex;
   align-items: center;
@@ -139,9 +166,14 @@
   border-radius: 8px;
   background: var(--umng-white);
   color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+  text-align: initial;
 }
 
-.repository-card:hover {
+.repository-card:hover,
+.repository-card.selected {
   border-color: rgba(196, 154, 44, 0.65);
 }
 
@@ -193,53 +225,9 @@
   font-size: 1.08rem;
 }
 
-.language-typescript {
-  background: #dbeafe;
-  color: #1d4ed8;
-}
-
-.language-javascript {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.language-java,
-.language-c,
-.language-c- {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-.language-go,
-.language-html {
-  background: #ccfbf1;
-  color: #0f766e;
-}
-
-.language-python,
-.language-kotlin,
-.language-swift {
-  background: #ede9fe;
-  color: #6d28d9;
-}
-
-.language-shell,
-.language-rust,
-.language-yaml {
-  background: #e5e7eb;
-  color: #374151;
-}
-
 .status-panel {
-  display: grid;
-  min-height: 240px;
   margin-top: 22px;
-  place-items: center;
-  border: 1px solid #dedede;
-  border-radius: 8px;
-  background: var(--umng-white);
   color: var(--umng-navy);
-  font-weight: 800;
 }
 
 .status-panel.error {
@@ -263,7 +251,7 @@
 
 @media (max-width: 1200px) {
   .repositories-grid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
 
@@ -279,6 +267,14 @@
 
   .repo-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .master-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-placeholder {
+    position: static;
   }
 
   .pagination {

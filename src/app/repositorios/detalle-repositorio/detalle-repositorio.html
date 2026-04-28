@@ -1,0 +1,57 @@
+<section class="detalle-page">
+  @if (detalleVm$ | async; as vm) {
+    @if (vm.cargando) {
+      <section class="status-panel" aria-live="polite">
+        <div class="loader"></div>
+        <p>Cargando detalle del repositorio...</p>
+      </section>
+    } @else if (vm.error || !vm.repositorio) {
+      <section class="status-panel error" aria-live="assertive">
+        <p>No fue posible encontrar el repositorio solicitado.</p>
+        <a routerLink="/repositorios">Volver a repositorios</a>
+      </section>
+    } @else {
+      <aside class="detail-panel" aria-label="Detalle del repositorio">
+        <a class="close-button" routerLink="/repositorios">Volver</a>
+
+        <header class="detail-header">
+          <span class="repo-avatar" aria-hidden="true"></span>
+          <div>
+            <p class="eyebrow">Repositorio seleccionado</p>
+            <h2>{{ vm.repositorio.name }}</h2>
+          </div>
+          <span class="language-pill" [ngClass]="obtenerClaseLenguaje(vm.repositorio.language)">
+            {{ vm.repositorio.language }}
+          </span>
+        </header>
+
+        <dl class="detail-list">
+          <div>
+            <dt>Identificador</dt>
+            <dd>#{{ vm.repositorio.id }}</dd>
+          </div>
+          <div>
+            <dt>Descripcion</dt>
+            <dd>{{ vm.repositorio.description }}</dd>
+          </div>
+          <div>
+            <dt>Propietario</dt>
+            <dd>{{ vm.repositorio.ownerId }}</dd>
+          </div>
+          <div>
+            <dt>Creado</dt>
+            <dd>{{ vm.repositorio.createdAt }}</dd>
+          </div>
+        </dl>
+
+        <section class="repo-section" aria-label="Resumen del repositorio">
+          <h3>Actividad</h3>
+          <div class="repo-list">
+            <span>{{ vm.repositorio.stars }} estrellas</span>
+            <span>{{ vm.repositorio.language }}</span>
+          </div>
+        </section>
+      </aside>
+    }
+  }
+</section>

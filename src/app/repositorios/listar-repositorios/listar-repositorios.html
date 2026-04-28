@@ -35,67 +35,88 @@
         </article>
       </section>
 
-      <section class="repositories-grid" aria-label="Listado de repositorios">
-        @for (
-          repositorio of obtenerRepositoriosPaginados(vm.repositorios);
-          track identificarRepositorio($index, repositorio)
-        ) {
-          <article class="repository-card">
-            <header class="repo-cover">
-              <span aria-hidden="true"></span>
-            </header>
-
-            <div class="repo-body">
-              <h3>{{ repositorio.name }}</h3>
-              <span class="language-pill" [ngClass]="obtenerClaseLenguaje(repositorio.language)">
-                {{ repositorio.language }}
-              </span>
-            </div>
-          </article>
-        }
-      </section>
-
-      @if (obtenerTotalPaginas(vm.repositorios) > 1) {
-        <nav class="pagination" aria-label="Paginacion de repositorios">
-          <p class="pagination-summary">
-            Mostrando {{ obtenerRangoActual(vm.repositorios) }} repositorios
-          </p>
-
-          <div class="pagination-controls">
-            <button
-              type="button"
-              class="pagination-button"
-              [disabled]="paginaActual === 1"
-              (click)="irPaginaAnterior(vm.repositorios)"
-              aria-label="Ir a la pagina anterior"
-            >
-              Anterior
-            </button>
-
-            @for (pagina of obtenerPaginas(vm.repositorios); track pagina) {
-              <button
-                type="button"
-                class="pagination-button page-number"
-                [class.active]="paginaActual === pagina"
-                [attr.aria-current]="paginaActual === pagina ? 'page' : null"
-                (click)="cambiarPagina(pagina, vm.repositorios)"
+      <section class="master-detail">
+        <div>
+          <section class="repositories-grid" aria-label="Listado de repositorios">
+            @for (
+              repositorio of obtenerRepositoriosPaginados(vm.repositorios);
+              track identificarRepositorio($index, repositorio)
+            ) {
+              <a
+                class="repository-card"
+                [routerLink]="['/repositorios', repositorio.id]"
+                routerLinkActive="selected"
               >
-                {{ pagina }}
-              </button>
-            }
+                <header class="repo-cover">
+                  <span aria-hidden="true"></span>
+                </header>
 
-            <button
-              type="button"
-              class="pagination-button"
-              [disabled]="paginaActual === obtenerTotalPaginas(vm.repositorios)"
-              (click)="irPaginaSiguiente(vm.repositorios)"
-              aria-label="Ir a la pagina siguiente"
-            >
-              Siguiente
-            </button>
-          </div>
-        </nav>
-      }
+                <div class="repo-body">
+                  <h3>{{ repositorio.name }}</h3>
+                  <span
+                    class="language-pill"
+                    [ngClass]="obtenerClaseLenguaje(repositorio.language)"
+                  >
+                    {{ repositorio.language }}
+                  </span>
+                </div>
+              </a>
+            }
+          </section>
+
+          @if (obtenerTotalPaginas(vm.repositorios) > 1) {
+            <nav class="pagination" aria-label="Paginacion de repositorios">
+              <p class="pagination-summary">
+                Mostrando {{ obtenerRangoActual(vm.repositorios) }} repositorios
+              </p>
+
+              <div class="pagination-controls">
+                <button
+                  type="button"
+                  class="pagination-button"
+                  [disabled]="paginaActual === 1"
+                  (click)="irPaginaAnterior(vm.repositorios)"
+                  aria-label="Ir a la pagina anterior"
+                >
+                  Anterior
+                </button>
+
+                @for (pagina of obtenerPaginas(vm.repositorios); track pagina) {
+                  <button
+                    type="button"
+                    class="pagination-button page-number"
+                    [class.active]="paginaActual === pagina"
+                    [attr.aria-current]="paginaActual === pagina ? 'page' : null"
+                    (click)="cambiarPagina(pagina, vm.repositorios)"
+                  >
+                    {{ pagina }}
+                  </button>
+                }
+
+                <button
+                  type="button"
+                  class="pagination-button"
+                  [disabled]="paginaActual === obtenerTotalPaginas(vm.repositorios)"
+                  (click)="irPaginaSiguiente(vm.repositorios)"
+                  aria-label="Ir a la pagina siguiente"
+                >
+                  Siguiente
+                </button>
+              </div>
+            </nav>
+          }
+        </div>
+
+        <aside class="detail-column" aria-label="Detalle de repositorio">
+          @if (mostrarDetalle()) {
+            <router-outlet></router-outlet>
+          } @else {
+            <section class="detail-placeholder">
+              <p>Selecciona un repositorio para ver su detalle.</p>
+            </section>
+          }
+        </aside>
+      </section>
     }
   }
 </section>

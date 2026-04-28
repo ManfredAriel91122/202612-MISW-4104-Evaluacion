@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { catchError, map, Observable, of, startWith } from 'rxjs';
 
 import { Repositorio } from '../repositorio';
@@ -21,12 +22,19 @@ export class ListarRepositorios {
   readonly repositoriosPorPagina = 8;
   paginaActual = 1;
 
-  constructor(private readonly repositorioService: RepositorioService) {
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly repositorioService: RepositorioService,
+  ) {
     this.repositoriosVm$ = this.repositorioService.obtenerRepositorios().pipe(
       map((repositorios) => ({ repositorios, cargando: false, error: false })),
       startWith({ repositorios: [], cargando: true, error: false }),
       catchError(() => of({ repositorios: [], cargando: false, error: true })),
     );
+  }
+
+  mostrarDetalle(): boolean {
+    return Boolean(this.route.firstChild);
   }
 
   identificarRepositorio(_index: number, repositorio: Repositorio): number {
